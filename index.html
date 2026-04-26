@@ -2,89 +2,165 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Americano Co. - Menü</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>The Americano Co. - Dijital Menü</title>
+    
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --bg: #000; --card: #111; --text: #fff; --accent: #fff; }
+        :root { --bg: #000; --card: #111; --text: #fff; --accent: #fff; --border: #222; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
         header { text-align: center; padding: 30px; }
-        .logo { max-width: 200px; height: auto; }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 15px; }
-        .nav-bar { display: none; padding: 15px 0; }
-        .back-btn { background: none; border: 1px solid #fff; color: #fff; padding: 10px 20px; border-radius: 30px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .cat-btn { background: var(--card); border: 1px solid #333; border-radius: 15px; padding: 25px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .logo { max-width: 180px; height: auto; }
+        .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
+        .nav-bar { display: none; padding: 10px 0; margin-bottom: 10px; }
+        .back-btn { background: none; border: 1px solid #fff; color: #fff; padding: 8px 16px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .cat-btn { background: var(--card); border: 1px solid #333; border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; }
         .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .menu-item { background: var(--card); border-radius: 15px; overflow: hidden; border: 1px solid #222; }
-        .img-box { width: 100%; height: 200px; background: #222; }
-        .menu-img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
-        .menu-info { padding: 12px; }
-        .item-name { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
+        .menu-item { background: var(--card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); display: flex; flex-direction: column; }
+        .img-box { width: 100%; position: relative; padding-top: 100%; background: #222; }
+        .menu-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+        .menu-info { padding: 10px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .item-name { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin: 0; }
         .item-price { font-size: 1rem; font-weight: bold; text-align: right; margin-top: 5px; }
-        .classic-list { background: var(--card); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #222; }
+        .classic-list { background: var(--card); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border); }
         .classic-item { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px; }
         .dots { flex-grow: 1; border-bottom: 1px dotted #444; margin: 0 8px 4px 8px; }
         .page-section { display: none; animation: fadeIn 0.3s; }
         .active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
-        .modal img { max-width: 95%; max-height: 90%; }
+        h2 { text-align: center; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.2rem; }
+        .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
+        .modal img { max-width: 95%; max-height: 90%; border-radius: 8px; }
     </style>
 </head>
 <body>
-    <div id="imgModal" class="modal" onclick="this.style.display='none'"><img id="modalImg"></div>
-    <header><img src="logo.jpg" class="logo"></header>
-    <div class="container">
-        <div class="nav-bar" id="navBar"><button class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Geri</button></div>
-        <div id="home" class="page-section active">
-            <div class="category-grid">
-                <div class="cat-btn" onclick="showCat('desserts')"><i class="fas fa-cookie-bite"></i><span>Tatlılar</span></div>
-                <div class="cat-btn" onclick="showCat('coffee')"><i class="fas fa-mug-hot"></i><span>Kahveler</span></div>
-                <div class="cat-btn" onclick="showCat('cold')"><i class="fas fa-glass-whiskey"></i><span>Soğuklar</span></div>
-                <div class="cat-btn" onclick="showCat('food')"><i class="fas fa-utensils"></i><span>Kruvasan</span></div>
-            </div>
+
+<div id="imgModal" class="modal" onclick="this.style.display='none'"><img id="modalImg"></div>
+
+<header><img src="logo.jpg" class="logo" onerror="this.src='https://via.placeholder.com/150?text=Logo+Bulunamadı'"></header>
+
+<div class="container">
+    <div class="nav-bar" id="navBar"><button class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Kategoriler</button></div>
+
+    <div id="home" class="page-section active">
+        <div class="category-grid">
+            <div class="cat-btn" onclick="showCat('coffee')"><i class="fas fa-mug-hot"></i><span>Kahveler</span></div>
+            <div class="cat-btn" onclick="showCat('desserts')"><i class="fas fa-cookie-bite"></i><span>Tatlılar</span></div>
+            <div class="cat-btn" onclick="showCat('cold')"><i class="fas fa-glass-whiskey"></i><span>Soğuklar</span></div>
+            <div class="cat-btn" onclick="showCat('food')"><i class="fas fa-utensils"></i><span>Kruvasan</span></div>
+            <div class="cat-btn" onclick="showCat('hot')"><i class="fas fa-leaf"></i><span>Bitki Çayları</span></div>
         </div>
-        <div id="desserts" class="page-section">
-            <h2>Tatlılar</h2>
-            <div class="menu-grid">
-                <div class="menu-item"><div class="img-box"><img src="king.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">King</p><div class="item-price">430₺</div></div></div>
-                <div class="menu-item"><div class="img-box"><img src="fiesta.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Fiesta</p><div class="item-price">430₺</div></div></div>
-                <div class="menu-item"><div class="img-box"><img src="forever.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Forever</p><div class="item-price">430₺</div></div></div>
-                <div class="menu-item"><div class="img-box"><img src="crown.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Crown</p><div class="item-price">420₺</div></div></div>
-            </div>
-            <div class="classic-list" style="margin-top:20px;">
-                <div class="classic-item"><span>Love Story</span><span class="dots"></span><span>435₺</span></div>
-                <div class="classic-item"><span>Queen</span><span class="dots"></span><span>405₺</span></div>
-            </div>
+    </div>
+
+    <div id="coffee" class="page-section">
+        <h2>Sıcak Kahveler</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="img-box"><img src="espresso.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Espresso</p><div class="item-price">150₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="double-espresso.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Double Espresso</p><div class="item-price">160₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="americano.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Americano</p><div class="item-price">220₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="latte.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Latte</p><div class="item-price">250₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="mocha.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Mocha</p><div class="item-price">270₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="white-mocha.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">White Mocha</p><div class="item-price">280₺</div></div></div>
         </div>
-        <div id="coffee" class="page-section">
-            <h2>Kahveler</h2>
-            <div class="menu-grid">
-                <div class="menu-item"><div class="img-box"><img src="espresso.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Espresso</p><div class="item-price">150₺</div></div></div>
-                <div class="menu-item"><div class="img-box"><img src="latte.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Latte</p><div class="item-price">250₺</div></div></div>
-            </div>
-            <div class="classic-list" style="margin-top:20px;">
-                <div class="classic-item"><span>Americano</span><span class="dots"></span><span>220₺</span></div>
-                <div class="classic-item"><span>Filtre Kahve</span><span class="dots"></span><span>200₺</span></div>
-            </div>
+        <div class="classic-list" style="margin-top:15px;">
+            <div class="classic-item"><span>Cappuccino</span><span class="dots"></span><span>240₺</span></div>
+            <div class="classic-item"><span>Flat White</span><span class="dots"></span><span>260₺</span></div>
+            <div class="classic-item"><span>Cortado</span><span class="dots"></span><span>200₺</span></div>
+            <div class="classic-item"><span>Filtre Kahve</span><span class="dots"></span><span>200₺</span></div>
+            <div class="classic-item"><span>Sütlü Filtre Kahve</span><span class="dots"></span><span>220₺</span></div>
+            <div class="classic-item"><span>Türk Kahvesi</span><span class="dots"></span><span>120₺</span></div>
+            <div class="classic-item"><span>Caramel Macchiato</span><span class="dots"></span><span>280₺</span></div>
+            <div class="classic-item"><span>Sıcak Çikolata</span><span class="dots"></span><span>250₺</span></div>
         </div>
+    </div>
+
+    <div id="desserts" class="page-section">
+        <h2>Tatlılar</h2>
+        <div class="menu-grid">
+            <div class="menu-item"><div class="img-box"><img src="king.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">King</p><div class="item-price">430₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="fiesta.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Fiesta</p><div class="item-price">430₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="forever.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Forever</p><div class="item-price">430₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="crown.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Crown</p><div class="item-price">420₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="crunch.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Crunch</p><div class="item-price">420₺</div></div></div>
+            <div class="menu-item"><div class="img-box"><img src="love-story.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Love Story</p><div class="item-price">435₺</div></div></div>
         </div>
-    <script>
-        function showCat(id){
-            document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.getElementById('navBar').style.display='block';
-            document.getElementById('home').style.display='none';
-            window.scrollTo(0,0);
-        }
-        function goHome(){
-            document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
-            document.getElementById('home').classList.add('active');
-            document.getElementById('navBar').style.display='none';
-        }
-        function openM(el){ document.getElementById('imgModal').style.display='flex'; document.getElementById('modalImg').src=el.src; }
-    </script>
+        <div class="classic-list" style="margin-top:15px;">
+            <div class="classic-item"><span>Queen</span><span class="dots"></span><span>405₺</span></div>
+            <div class="classic-item"><span>Berry White</span><span class="dots"></span><span>420₺</span></div>
+            <div class="classic-item"><span>Bonita</span><span class="dots"></span><span>405₺</span></div>
+            <div class="classic-item"><span>Tress</span><span class="dots"></span><span>365₺</span></div>
+            <div class="classic-item"><span>Bliss</span><span class="dots"></span><span>365₺</span></div>
+        </div>
+    </div>
+
+    <div id="cold" class="page-section">
+        <h2>Soğuk İçecekler</h2>
+        <div class="classic-list">
+            <div class="classic-item"><span>Limonata</span><span class="dots"></span><span>200₺</span></div>
+            <div class="classic-item"><span>Cool Lime</span><span class="dots"></span><span>250₺</span></div>
+            <div class="classic-item"><span>Berry Hibiscus</span><span class="dots"></span><span>250₺</span></div>
+            <div class="classic-item"><span>Iced Americano</span><span class="dots"></span><span>220₺</span></div>
+            <div class="classic-item"><span>Iced Latte</span><span class="dots"></span><span>250₺</span></div>
+            <div class="classic-item"><span>Churchill</span><span class="dots"></span><span>180₺</span></div>
+            <div class="classic-item"><span>Su / Soda</span><span class="dots"></span><span>60₺ / 150₺</span></div>
+        </div>
+    </div>
+
+    <div id="food" class="page-section">
+        <h2>Kruvasan & Brunch</h2>
+        <div class="classic-list">
+            <div class="classic-item"><span>Sade Kruvasan</span><span class="dots"></span><span>280₺</span></div>
+            <div class="classic-item"><span>Çikolatalı Kruvasan</span><span class="dots"></span><span>350₺</span></div>
+            <div class="classic-item"><span>Sade Kremalı Kruvasan</span><span class="dots"></span><span>365₺</span></div>
+            <div class="classic-item"><span>Eggsmeat / Eggy</span><span class="dots"></span><span>410₺</span></div>
+            <div class="classic-item"><span>Avocado Brunch</span><span class="dots"></span><span>370₺</span></div>
+        </div>
+    </div>
+
+    <div id="hot" class="page-section">
+        <h2>Bitki Çayları</h2>
+        <div class="classic-list">
+            <div class="classic-item"><span>Çay</span><span class="dots"></span><span>60₺</span></div>
+            <div class="classic-item"><span>Fincan Çay</span><span class="dots"></span><span>85₺</span></div>
+            <div class="classic-item"><span>Ada / Kış / Hibiscus / Ihlamur</span><span class="dots"></span><span>150₺</span></div>
+            <div class="classic-item"><span>Salep</span><span class="dots"></span><span>220₺</span></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function showCat(id){
+        document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        document.getElementById('navBar').style.display='block';
+        document.getElementById('home').style.display='none';
+        window.scrollTo(0,0);
+    }
+    function goHome(){
+        document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+        document.getElementById('home').classList.add('active');
+        document.getElementById('navBar').style.display='none';
+    }
+    function openM(el){ 
+        const modal = document.getElementById('imgModal');
+        const modalImg = document.getElementById('modalImg');
+        modal.style.display='flex'; 
+        modalImg.src = el.src; 
+    }
+    
+    // Resim yüklenemezse gri bir kare göster (Kırık resim ikonunu engeller)
+    document.querySelectorAll('img').forEach(img => {
+        img.onerror = function() {
+            this.src = 'https://via.placeholder.com/300?text=Görsel+Hazırlanıyor';
+            this.style.opacity = '0.5';
+        };
+    });
+</script>
 </body>
 </html>
