@@ -1,72 +1,67 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="notranslate" translate="no">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>The Americano Co. - Menü</title>
     
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
+    
+    <title>The Americano Co. - Menü</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
     <style>
         :root { --bg: #000; --card: #111; --text: #fff; --accent: #fff; --border: #222; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
-        header { text-align: center; padding: 30px; }
-        .logo { max-width: 200px; height: auto; cursor: pointer; }
-        .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
+        header { text-align: center; padding: 30px; cursor: pointer; }
+        .logo { max-width: 180px; height: auto; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 15px; }
         
-        /* Navigasyon Çubuğu */
-        .nav-bar { display: none; padding: 15px 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
-        .back-btn { background: none; border: 1px solid #fff; color: #fff; padding: 10px 20px; border-radius: 30px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1rem; }
+        .nav-bar { display: none; padding: 15px 0; margin-bottom: 10px; }
+        .back-btn { background: #1a1a1a; border: 1px solid #444; color: #fff; padding: 12px 25px; border-radius: 30px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 1rem; }
 
-        /* Kategori Butonları */
         .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .cat-btn { background: var(--card); border: 1px solid #333; border-radius: 15px; padding: 25px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .cat-btn i { font-size: 2rem; color: var(--accent); }
+        .cat-btn { background: var(--card); border: 1px solid #333; border-radius: 15px; padding: 35px 10px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .cat-btn i { font-size: 2.5rem; color: var(--accent); }
         .cat-btn span { font-weight: 600; font-size: 1.1rem; }
 
-        /* Ürün Kartları */
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
         .menu-item { background: var(--card); border-radius: 15px; overflow: hidden; border: 1px solid var(--border); display: flex; flex-direction: column; }
         .img-box { width: 100%; position: relative; padding-top: 100%; background: #222; }
         .menu-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
         .menu-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .item-name { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; margin: 0; }
-        .item-price { font-size: 1rem; font-weight: bold; text-align: right; margin-top: 8px; }
+        .item-price { font-size: 1.1rem; font-weight: bold; text-align: right; margin-top: 8px; color: var(--accent); }
 
-        /* Liste Görünümü */
-        .classic-list { background: var(--card); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border); }
+        .classic-list { background: var(--card); padding: 20px; border-radius: 15px; margin-bottom: 30px; border: 1px solid var(--border); }
         .classic-item { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
         .dots { flex-grow: 1; border-bottom: 1px dotted #444; margin: 0 8px 4px 8px; }
 
-        /* Sayfa Bölümleri */
-        .page-section { display: none; } /* JS ile kontrol edilir */
-        .active { display: block !important; animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .page-section { display: none; width: 100%; }
+        .active-section { display: block !important; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        h2 { text-align: center; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; font-size: 1.3rem; }
-        
-        /* Modal (Zoom) */
-        .modal { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
+        h2 { text-align: center; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 25px; font-size: 1.4rem; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
         .modal img { max-width: 95%; max-height: 90%; border-radius: 8px; }
-        
-        footer { text-align: center; padding: 30px; color: #555; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
 <div id="imgModal" class="modal" onclick="this.style.display='none'"><img id="modalImg"></div>
 
-<header onclick="goHome()"><img src="logo.jpg" class="logo"></header>
+<header onclick="goHome()">
+    <img src="logo.jpg" class="logo">
+</header>
 
 <div class="container">
-    <div class="nav-bar" id="navBar">
-        <button class="back-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i> Kategoriler</button>
+    <div id="navBar" class="nav-bar">
+        <button class="back-btn" onclick="goHome()">
+            <i class="fas fa-arrow-left"></i> Kategoriler
+        </button>
     </div>
 
-    <div id="home" class="page-section active">
+    <div id="home" class="page-section active-section">
         <div class="category-grid">
             <div class="cat-btn" onclick="showCat('coffee')"><i class="fas fa-mug-hot"></i><span>Kahveler</span></div>
             <div class="cat-btn" onclick="showCat('desserts')"><i class="fas fa-cookie-bite"></i><span>Tatlılar</span></div>
@@ -83,7 +78,7 @@
             <div class="menu-item"><div class="img-box"><img src="americano.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Americano</p><div class="item-price">220₺</div></div></div>
             <div class="menu-item"><div class="img-box"><img src="mocha.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Mocha</p><div class="item-price">270₺</div></div></div>
         </div>
-        <div class="classic-list" style="margin-top:20px;">
+        <div class="classic-list">
             <div class="classic-item"><span>Double Espresso</span><span class="dots"></span><span>160₺</span></div>
             <div class="classic-item"><span>Cappuccino</span><span class="dots"></span><span>240₺</span></div>
             <div class="classic-item"><span>Türk Kahvesi</span><span class="dots"></span><span>120₺</span></div>
@@ -99,11 +94,6 @@
             <div class="menu-item"><div class="img-box"><img src="forever.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Forever</p><div class="item-price">430₺</div></div></div>
             <div class="menu-item"><div class="img-box"><img src="crown.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Crown</p><div class="item-price">420₺</div></div></div>
         </div>
-        <div class="classic-list" style="margin-top:20px;">
-            <div class="classic-item"><span>Love Story</span><span class="dots"></span><span>435₺</span></div>
-            <div class="classic-item"><span>Queen</span><span class="dots"></span><span>405₺</span></div>
-            <div class="classic-item"><span>Crunch</span><span class="dots"></span><span>420₺</span></div>
-        </div>
     </div>
 
     <div id="cold" class="page-section">
@@ -111,8 +101,6 @@
         <div class="classic-list">
             <div class="classic-item"><span>Limonata</span><span class="dots"></span><span>200₺</span></div>
             <div class="classic-item"><span>Cool Lime</span><span class="dots"></span><span>250₺</span></div>
-            <div class="classic-item"><span>Berry Hibiscus</span><span class="dots"></span><span>250₺</span></div>
-            <div class="classic-item"><span>Milkshake Çeşitleri</span><span class="dots"></span><span>250₺ - 260₺</span></div>
             <div class="classic-item"><span>Su / Soda</span><span class="dots"></span><span>60₺ / 150₺</span></div>
         </div>
     </div>
@@ -120,57 +108,40 @@
     <div id="food" class="page-section">
         <h2>Kruvasan & Brunch</h2>
         <div class="classic-list">
-            <div class="classic-item"><span>Sade / Çikolatalı Kruvasan</span><span class="dots"></span><span>280₺ / 350₺</span></div>
-            <div class="classic-item"><span>Eggsmeat / Eggy</span><span class="dots"></span><span>410₺</span></div>
-            <div class="classic-item"><span>Avocado Brunch</span><span class="dots"></span><span>370₺</span></div>
+            <div class="classic-item"><span>Sade Kruvasan</span><span class="dots"></span><span>280₺</span></div>
+            <div class="classic-item"><span>Eggsmeat</span><span class="dots"></span><span>410₺</span></div>
         </div>
     </div>
 </div>
 
-<footer>©️ 2026 The Americano Co.</footer>
-
 <script>
-    // Sayfa değiştirme fonksiyonu
-    function showCat(id){
-        // Tüm bölümleri gizle
-        const sections = document.querySelectorAll('.page-section');
-        sections.forEach(s => s.classList.remove('active'));
-        
-        // Seçilen bölümü göster
-        const target = document.getElementById(id);
-        if(target) target.classList.add('active');
-        
-        // Geri butonunu göster, ana ekranı gizle (eğer ana ekranda değilsek)
+    function showCat(id) {
+        var sections = document.getElementsByClassName('page-section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+            sections[i].classList.remove('active-section');
+        }
+        var target = document.getElementById(id);
+        target.style.display = 'block';
+        target.classList.add('active-section');
         document.getElementById('navBar').style.display = 'block';
         document.getElementById('home').style.display = 'none';
-        
         window.scrollTo(0,0);
     }
 
-    // Ana ekrana dönme fonksiyonu
-    function goHome(){
-        // Tüm bölümleri gizle
-        const sections = document.querySelectorAll('.page-section');
-        sections.forEach(s => s.classList.remove('active'));
-        
-        // Ana ekranı göster
-        const home = document.getElementById('home');
-        home.style.display = 'block';
-        home.classList.add('active');
-        
-        // Geri butonunu gizle
+    function goHome() {
+        var sections = document.getElementsByClassName('page-section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+            sections[i].classList.remove('active-section');
+        }
+        document.getElementById('home').style.display = 'block';
+        document.getElementById('home').classList.add('active-section');
         document.getElementById('navBar').style.display = 'none';
-        
         window.scrollTo(0,0);
     }
 
-    // Resim büyütme fonksiyonu
-    function openM(el){
-        const modal = document.getElementById('imgModal');
-        const modalImg = document.getElementById('modalImg');
-        modal.style.display = 'flex';
-        modalImg.src = el.src;
-    }
+    function openM(el) { document.getElementById('imgModal').style.display = 'flex'; document.getElementById('modalImg').src = el.src; }
 </script>
 </body>
 </html>
