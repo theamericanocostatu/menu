@@ -22,7 +22,6 @@
 
         .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .cat-btn { background: var(--card); border: 1px solid #333; border-radius: 15px; padding: 30px 10px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px; transition: 0.3s; }
-        .cat-btn:active { transform: scale(0.95); }
         .cat-btn i { font-size: 2.2rem; color: var(--accent); }
         .cat-btn span { font-weight: 600; font-size: 1.1rem; }
 
@@ -31,7 +30,7 @@
         .img-box { width: 100%; position: relative; padding-top: 100%; background: #222; }
         .menu-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
         .menu-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .item-name { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin: 0; }
+        .item-name { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin: 0; }
         .item-price { font-size: 1rem; font-weight: bold; text-align: right; margin-top: 8px; color: var(--accent); }
 
         .classic-list { background: var(--card); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border); }
@@ -58,7 +57,7 @@
             <div class="category-grid">
                 <div class="cat-btn" onclick="showCat('coffee')"><i class="fas fa-mug-hot"></i><span>Kahveler</span></div>
                 <div class="cat-btn" onclick="showCat('desserts')"><i class="fas fa-cookie-bite"></i><span>Tatlılar</span></div>
-                <div class="cat-btn" onclick="showCat('iced-coffee')"><i class="fas fa-ice-cream"></i><span>Soğuk Kahveler</span></div>
+                <div class="cat-btn" onclick="showCat('iced-coffee')"><i class="fas fa-snowflake"></i><span>Soğuk Kahveler</span></div>
                 <div class="cat-btn" onclick="showCat('cold')"><i class="fas fa-glass-whiskey"></i><span>Soğuk İçecekler</span></div>
                 <div class="cat-btn" onclick="showCat('food')"><i class="fas fa-utensils"></i><span>Kruvasan</span></div>
                 <div class="cat-btn" onclick="showCat('hot-tea')"><i class="fas fa-leaf"></i><span>Bitki Çayları</span></div>
@@ -69,17 +68,18 @@
             <h2>Sıcak Kahveler</h2>
             <div class="menu-grid">
                 <div class="menu-item"><div class="img-box"><img src="espresso.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Espresso</p><div class="item-price">150₺</div></div></div>
-                <div class="menu-item"><div class="img-box"><img src="double-espresso.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Double Espresso</p><div class="item-price">160₺</div></div></div>
-                <div class="menu-item"><div class="img-box"><img src="americano.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Americano</p><div class="item-price">220₺</div></div></div>
                 <div class="menu-item"><div class="img-box"><img src="latte.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Latte</p><div class="item-price">250₺</div></div></div>
+                <div class="menu-item"><div class="img-box"><img src="americano.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Americano</p><div class="item-price">220₺</div></div></div>
                 <div class="menu-item"><div class="img-box"><img src="mocha.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Mocha</p><div class="item-price">270₺</div></div></div>
-                <div class="menu-item"><div class="img-box"><img src="white-mocha.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">White Mocha</p><div class="item-price">280₺</div></div></div>
             </div>
             <div class="classic-list">
+                <div class="classic-item"><span>Double Espresso</span><span class="dots"></span><span>160₺</span></div>
                 <div class="classic-item"><span>Cappuccino</span><span class="dots"></span><span>240₺</span></div>
+                <div class="classic-item"><span>White Mocha</span><span class="dots"></span><span>280₺</span></div>
                 <div class="classic-item"><span>Filtre Kahve</span><span class="dots"></span><span>200₺</span></div>
                 <div class="classic-item"><span>Türk Kahvesi</span><span class="dots"></span><span>120₺</span></div>
-                <div class="classic-item"><span>Flat White / Cortado</span><span class="dots"></span><span>260₺ / 200₺</span></div>
+                <div class="classic-item"><span>Flat White</span><span class="dots"></span><span>260₺</span></div>
+                <div class="classic-item"><span>Cortado</span><span class="dots"></span><span>200₺</span></div>
             </div>
         </div>
 
@@ -90,23 +90,32 @@
                 <div class="menu-item"><div class="img-box"><img src="fiesta.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Fiesta</p><div class="item-price">430₺</div></div></div>
                 <div class="menu-item"><div class="img-box"><img src="forever.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Forever</p><div class="item-price">430₺</div></div></div>
                 <div class="menu-item"><div class="img-box"><img src="crown.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Crown</p><div class="item-price">420₺</div></div></div>
-                <div class="menu-item"><div class="img-box"><img src="love-story.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Love Story</p><div class="item-price">435₺</div></div></div>
-                <div class="menu-item"><div class="img-box"><img src="queen.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Queen</p><div class="item-price">405₺</div></div></div>
             </div>
             <div class="classic-list">
-                <div class="classic-item"><span>Crunch / Shine</span><span class="dots"></span><span>420₺ / 430₺</span></div>
-                <div class="classic-item"><span>Serenity / Berry White</span><span class="dots"></span><span>395₺ / 420₺</span></div>
+                <div class="classic-item"><span>Love Story</span><span class="dots"></span><span>435₺</span></div>
+                <div class="classic-item"><span>Queen</span><span class="dots"></span><span>405₺</span></div>
+                <div class="classic-item"><span>Crunch</span><span class="dots"></span><span>420₺</span></div>
+                <div class="classic-item"><span>Shine</span><span class="dots"></span><span>430₺</span></div>
+                <div class="classic-item"><span>Serenity</span><span class="dots"></span><span>395₺</span></div>
+                <div class="classic-item"><span>Berry White</span><span class="dots"></span><span>420₺</span></div>
+                <div class="classic-item"><span>Bonita</span><span class="dots"></span><span>405₺</span></div>
+                <div class="classic-item"><span>Bliss</span><span class="dots"></span><span>365₺</span></div>
+                <div class="classic-item"><span>Tress</span><span class="dots"></span><span>365₺</span></div>
             </div>
         </div>
 
         <div id="iced-coffee" class="page-section">
             <h2>Soğuk Kahveler</h2>
+            <div class="menu-grid">
+                <div class="menu-item"><div class="img-box"><img src="iced-americano.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Iced Americano</p><div class="item-price">220₺</div></div></div>
+                <div class="menu-item"><div class="img-box"><img src="iced-latte.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Iced Latte</p><div class="item-price">250₺</div></div></div>
+                <div class="menu-item"><div class="img-box"><img src="iced-mocha.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Iced Mocha</p><div class="item-price">270₺</div></div></div>
+                <div class="menu-item"><div class="img-box"><img src="iced-white-mocha.jpg" class="menu-img" onclick="openM(this)"></div><div class="menu-info"><p class="item-name">Iced White Mocha</p><div class="item-price">280₺</div></div></div>
+            </div>
             <div class="classic-list">
-                <div class="classic-item"><span>Iced Americano</span><span class="dots"></span><span>220₺</span></div>
-                <div class="classic-item"><span>Iced Latte</span><span class="dots"></span><span>250₺</span></div>
-                <div class="classic-item"><span>Iced Mocha</span><span class="dots"></span><span>270₺</span></div>
-                <div class="classic-item"><span>Iced White Mocha</span><span class="dots"></span><span>280₺</span></div>
-                <div class="classic-item"><span>Chocolatte / Vanilya Frappe</span><span class="dots"></span><span>240₺ / 230₺</span></div>
+                <div class="classic-item"><span>Iced Caramel Macchiato</span><span class="dots"></span><span>280₺</span></div>
+                <div class="classic-item"><span>Chocolatte Frappe</span><span class="dots"></span><span>240₺</span></div>
+                <div class="classic-item"><span>Vanilya Frappe</span><span class="dots"></span><span>230₺</span></div>
             </div>
         </div>
 
@@ -114,31 +123,39 @@
             <h2>Soğuk İçecekler</h2>
             <div class="classic-list">
                 <div class="classic-item"><span>Limonata</span><span class="dots"></span><span>200₺</span></div>
-                <div class="classic-item"><span>Cool Lime / Berry Hibiscus</span><span class="dots"></span><span>250₺</span></div>
-                <div class="classic-item"><span>Su / Soda / Churchill</span><span class="dots"></span><span>60₺ / 150₺ / 180₺</span></div>
-                <div class="classic-item"><span>Milkshake Çeşitleri</span><span class="dots"></span><span>250₺-260₺</span></div>
+                <div class="classic-item"><span>Cool Lime</span><span class="dots"></span><span>250₺</span></div>
+                <div class="classic-item"><span>Berry Hibiscus</span><span class="dots"></span><span>250₺</span></div>
+                <div class="classic-item"><span>Su</span><span class="dots"></span><span>60₺</span></div>
+                <div class="classic-item"><span>Soda</span><span class="dots"></span><span>150₺</span></div>
             </div>
         </div>
 
         <div id="food" class="page-section">
             <h2>Kruvasan & Brunch</h2>
             <div class="classic-list">
-                <div class="classic-item"><span>Sade / Çikolatalı Kruvasan</span><span class="dots"></span><span>280₺ / 350₺</span></div>
-                <div class="classic-item"><span>Sade / Fındık Kremalı Kruv.</span><span class="dots"></span><span>365₺</span></div>
-                <div class="classic-item"><span>Eggsmeat / Eggy Breakfast</span><span class="dots"></span><span>410₺</span></div>
+                <div class="classic-item"><span>Sade Kruvasan</span><span class="dots"></span><span>280₺</span></div>
+                <div class="classic-item"><span>Çikolatalı Kruvasan</span><span class="dots"></span><span>350₺</span></div>
+                <div class="classic-item"><span>Eggsmeat</span><span class="dots"></span><span>410₺</span></div>
+                <div class="classic-item"><span>Avocado Brunch</span><span class="dots"></span><span>370₺</span></div>
             </div>
         </div>
 
         <div id="hot-tea" class="page-section">
-            <h2>Bitki Çayları & Sıcak İçecekler</h2>
+            <h2>Bitki Çayları</h2>
             <div class="classic-list">
-                <div class="classic-item"><span>Çay / Fincan Çay</span><span class="dots"></span><span>60₺ / 85₺</span></div>
-                <div class="classic-item"><span>Ihlamur / Kış Çayı / Ada Çayı</span><span class="dots"></span><span>150₺</span></div>
-                <div class="classic-item"><span>Salep / Sıcak Çikolata</span><span class="dots"></span><span>220₺ / 250₺</span></div>
+                <div class="classic-item"><span>Çay</span><span class="dots"></span><span>60₺</span></div>
+                <div class="classic-item"><span>Fincan Çay</span><span class="dots"></span><span>85₺</span></div>
+                <div class="classic-item"><span>Ada Çayı</span><span class="dots"></span><span>150₺</span></div>
+                <div class="classic-item"><span>Kış Çayı</span><span class="dots"></span><span>150₺</span></div>
+                <div class="classic-item"><span>Hibiscus Çayı</span><span class="dots"></span><span>150₺</span></div>
+                <div class="classic-item"><span>Ihlamur</span><span class="dots"></span><span>150₺</span></div>
+                <div class="classic-item"><span>Salep</span><span class="dots"></span><span>220₺</span></div>
             </div>
         </div>
 
     </div>
+
+    <footer>©️ 2026 The Americano Co.</footer>
 
     <script>
         function resetAll() {
